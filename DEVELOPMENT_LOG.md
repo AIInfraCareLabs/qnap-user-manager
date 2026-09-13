@@ -32,6 +32,10 @@
 
 ## 2026-09-13：MIT 与 GitHub 提交准备
 
-用户授权 MIT 许可及提交 GitHub。版权人使用本机已配置 Git 作者 puluto，加入 LICENSE、SPDX MIT 包元数据与发行许可证文件。用户已指定 AIInfraCareLabs 组织及公开仓库，仓库名使用 qnap-user-manager。仅提交源码、脱敏契约、文档和测试，原始发现报告与本地会话不提交。
+用户授权 MIT 许可及提交 GitHub。版权与提交身份统一使用 GitHub 用户名 puluto，加入 LICENSE、SPDX MIT 包元数据与发行许可证文件。用户已指定 AIInfraCareLabs 组织及公开仓库，仓库名使用 qnap-user-manager。仅提交源码、脱敏契约、文档和测试，原始发现报告与本地会话不提交。
 
-GitHub 早期设备授权连接曾因 EOF / 超时失败。用户随后完成系统登录，账号 puluto 通过钥匙串认证，已确认组织管理员权限；公开目标为 https://github.com/AIInfraCareLabs/qnap-user-manager，分支 main。系统 gh 可用；不会提交凭据或本地 CLI 文件。后续增强先检查远程历史并正常推送，禁止强推。
+GitHub 早期设备授权连接曾因 EOF / 超时失败。用户随后完成系统登录，账号 puluto 通过钥匙串认证，已确认组织管理员权限；公开目标为 https://github.com/AIInfraCareLabs/qnap-user-manager，分支 main。系统 gh 可用；不会提交凭据或本地 CLI 文件。后续增强先检查远程历史并正常推送；仅用户明确要求修正历史时使用带明确远程 SHA 校验的 force-with-lease。
+
+## 提交身份约定
+
+本仓库 author / committer 使用 puluto，邮箱使用 4004102+puluto@users.noreply.github.com；本地仓库 Git 配置已固定。用户要求修正已发布记录，四条历史提交的作者、提交者及版权/文档姓名已统一为用户名。后续不得使用系统全局真实姓名或公司邮箱提交本项目。
