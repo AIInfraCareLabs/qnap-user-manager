@@ -1,11 +1,15 @@
-# 兼容性
+# Compatibility
 
-仅验证 TS-873 / QTS 5.1.9.2954，build 20241120；客户端要求固件字符串与配置精确匹配。版本匹配不代表其他设备已经实测。
+English | [Simplified Chinese](zh_cn/COMPATIBILITY.md) | [Documentation](README.md)
 
-接口发现使用独立 Playwright context；后续原生 HTTP 登录、会话与资源回归已通过，无浏览器依赖。直接 HTTPS、其他机型/固件及 QuTS hero 未进行真实测试。
+Live verification covers only TS-873 / QTS 5.1.9.2954, build 20241120. The client requires an exact firmware/profile match. Matching a version does not mean another device has been tested.
 
-支持本地用户、用户组、顶层共享目录和显式共享权限。AD/LDAP、文件级/Windows ACL、应用权限、配额及账号定时到期不在当前验证范围。
+Discovery used an independent Playwright context. Subsequent native HTTP login, session management and resource regression passed without a browser. Direct HTTPS, other device models or firmware, and QuTS hero have not been verified against real devices.
 
-发现数据按参数位置保存契约和响应哈希，凭据不写入交付物。新增适配器需独立的固件配置与实测证据，不能将猜测参数标记为已验证。
+Supported operations concern local users, groups, top-level shared folders and explicit share permissions. AD/LDAP, file-level or Windows ACLs, application permissions, quotas and scheduled account expiration are outside the verified scope.
 
-已追加管理员密码重置、禁用/启用实测，以及禁用状态下重置密码保持禁用的验证；尚未测试 SMB 实际认证或活动会话断开。
+Discovery records parameter placement, contracts and response hashes; credentials are excluded from deliverables. New adapters need separate firmware profiles and live evidence. Do not mark guessed parameters verified.
+
+Live testing also covers administrator password reset, disable/enable and preservation of disabled state after resetting a password. Actual SMB authentication and disconnection of active sessions remain untested.
+
+Linux CI verifies Python 3.11, 3.12 and 3.13. Live NAS regression used Python 3.12. Windows behavior has not been verified.

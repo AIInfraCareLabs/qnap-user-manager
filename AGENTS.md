@@ -1,9 +1,11 @@
-# 续开发须知
+# Instructions for continued development
 
-读取 DEVELOPMENT_LOG.md、CONTRIBUTING.md 和 docs/VALIDATION.md 后开始增强。默认测试不得联网或修改 NAS。固件必须精确匹配，有证据方可 verified。发行契约与 discovery 镜像保持一致。
+Read DEVELOPMENT_LOG.md, CONTRIBUTING.md and docs/VALIDATION.md before extending the project. Default tests must not connect to or change a NAS. Require an exact firmware match and evidence before marking an operation verified. Keep the bundled contract and discovery mirror consistent.
 
-不要读取或输出 nas-session、密码、SID、原始 HAR。需要登录时请求用户通过隐藏输入完成。远程测试以当次已获授权范围为准，避免重复询问已有授权；先检查资源冲突，finally 清理本次创建的测试资源。发布包索引需明确用户指令。
+Do not read or print nas-session files, passwords, SIDs or raw HAR captures. Ask the user to authenticate through hidden input when needed. Determine live-test scope from the authorization already granted in the current conversation; do not ask again for existing authorization. Check resource collisions first and clean up resources created by the test in finally blocks. Publishing to a package index requires an explicit user instruction.
 
-改变代码后运行离线回归、Ruff 和相应构建/安装验证，记录关键决策、设备版本、测试结果与待办，不能把推测写成已实测。
+After changes, run offline regression, Ruff and applicable build/installation checks. Record key decisions, device versions, validation results and remaining work. Do not describe assumptions as verified facts.
 
-提交本仓库必须使用用户名 puluto 和 GitHub 隐私邮箱 4004102+puluto@users.noreply.github.com。不要沿用系统全局姓名或公司邮箱。
+Use the GitHub username puluto and private email 4004102+puluto@users.noreply.github.com for commits in this repository. Do not inherit a real name or company email from global Git configuration.
+
+Default documentation is English. Keep README-zh_cn.md and docs/zh_cn/ synchronized with their English counterparts. Chinese README links must lead to Chinese guides; each translated guide should link back to its English counterpart.

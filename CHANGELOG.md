@@ -1,11 +1,18 @@
 # Changelog
 
+English | [Simplified Chinese](docs/zh_cn/CHANGELOG.md)
+
+## Unreleased
+
+- Make English the default documentation language and add a Chinese README and translated documentation tree.
+- Add language navigation and include both languages in source distributions.
+
 ## 0.4.0 — 2026-09-13
 
-- 可安装 wheel / sdist，内置精确固件契约和公开 profile 加载器。
-- 原生登录、会话检查、注销撤销验证与安全 SID 文件；CLI 登录、退出和契约查询。
-- 用户、组、共享目录、共享权限 CRUD，成员变更、密码重置及用户禁用/启用。
-- 写后状态验证、显式与继承权限区分、保留未变更元数据、禁止自动重试写请求。
-- 完善离线回归、包安装验证、开发记录及示例。
+- Installable wheel and sdist with an exact bundled firmware contract and public profile loader.
+- Native login, session checks, verified logout and private SID files; CLI login/logout and contract queries.
+- User, group, shared-folder and share-permission CRUD, membership changes, password reset and disable/enable.
+- Mutation readback, separate explicit/inherited permissions, preservation of unchanged properties and no automatic write retries.
+- Offline regression, package-installation verification, development records and examples.
 
-仅验证 QTS 5.1.9.2954；本版本尚未上传包索引。
+Only QTS 5.1.9.2954 is live-verified. Version 0.4.0 is published on PyPI.

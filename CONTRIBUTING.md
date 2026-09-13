@@ -1,41 +1,48 @@
-# 开发指引
+# Development guide
 
-先阅读 README、DEVELOPMENT_LOG.md 与 docs/VALIDATION.md。不要读取或输出本地 nas-session 内容，也不要将原始 HAR、账号、密码或 SID 写入测试与发行包。
+English | [Simplified Chinese](docs/zh_cn/CONTRIBUTING.md)
 
-## 环境与检查
+Start with the [README](README.md), [development record](DEVELOPMENT_LOG.md) and [validation record](docs/VALIDATION.md). Do not read or print local nas-session content or put raw HAR captures, accounts, passwords or SIDs in tests or distributions.
 
-使用 Python 3.11+ 创建虚拟环境，执行 `python -m pip install -e '.[dev]'`。依次运行：
+## Environment and checks
+
+Create a virtual environment with Python 3.11+ and run `python -m pip install -e '.[dev]'`. Then run:
 
 ```sh
 python tests/run_regression.py
 python -m pytest --cov=qnap_sdk --cov-report=term-missing --cov-report=xml:reports/coverage.xml
-python -m ruff format --check qnap_sdk tests examples
-python -m ruff check qnap_sdk tests examples
+python -m ruff format --check qnap_sdk tests examples scripts
+python -m ruff check qnap_sdk tests examples scripts
 python -m build
 python -m twine check dist/*
+python scripts/check_release.py --dist dist
 ```
 
-离线 runner 禁止网络和子进程；默认 pytest 只发现 test_*.py，真实环境 runner 不会自动运行。新增测试必须覆盖行为、错误、状态读回或实际请求契约，不将远程写入放入普通测试。
+The offline runner forbids network connections and subprocesses. Default pytest discovery includes only `test_*.py`, so live runners do not run automatically. Tests should exercise behavior, failures, readback or actual wire contracts; ordinary tests must not make remote mutations.
 
-## 架构与固件增强
+## Architecture and firmware support
 
-- client.py：受限 origin、传输、响应解析、固件契约执行与写后验证。
-- auth.py：原生认证、会话检查、NAS 注销与撤销确认。
-- resources.py / models.py：公开资源 API、分页和模型。
-- profile.py / profiles/*.json：随发行包安装的固件接口契约。
-- session.py / cli.py：显式会话文件与命令行。
-- browser_transport.py / dashboard.py：可选本地桥接工具；核心 SDK 不依赖浏览器。
+- `client.py`: origin restrictions, transport, response parsing, contract execution and mutation readback.
+- `auth.py`: native authentication, session checks, NAS logout and revocation verification.
+- `resources.py` / `models.py`: public resource APIs, pagination and result models.
+- `profile.py` / `profiles/*.json`: firmware contracts installed with the package.
+- `session.py` / `cli.py`: explicit session persistence and command-line access.
+- `browser_transport.py` / `dashboard.py`: optional local bridge tools; the core SDK does not require a browser.
 
-包内 profiles JSON 为发行契约，discovery/endpoints.json 是兼容旧发现工具的镜像；修改现有契约时同步两者，测试检查一致性。新增固件使用独立 JSON 并在 profile.PROFILES 注册，禁止简单替换版本号。记录 method/path、query 与 form 参数位置、成功和失败字段、模型映射、证据与写后只读验证。
+Bundled profile JSON files define distribution contracts. `discovery/endpoints.json` mirrors the existing contract for older discovery tools. Update both copies together; tests verify equality. New firmware requires a separate JSON file registered in `profile.PROFILES`. Never claim compatibility by changing a version string. Record method/path, query versus form placement, success/failure fields, model mappings, evidence and read-only verification.
 
-先分析获授权设备前端已使用的接口，再做只读确认；写入只针对明确授权的专用测试资源。新增用户、组、共享目录前检查冲突；记录基线并在 finally 中清理，只删除本次新建资源。失败后先核实状态，不盲目重发写请求。密码修改只能用合成测试账号验证。
+First inspect endpoints already used by the authorized device's frontend, then confirm read-only behavior. Mutations must use explicitly authorized test resources. Check collisions before creating users, groups or shared folders; record the baseline and clean up only resources created by the test in `finally`. Inspect state after a failure instead of blindly retrying a write. Test password changes only on synthetic accounts.
 
-本次已授权的历史测试范围与证据见开发记录；下一次按当次用户授权范围判断是否需要询问。需要管理员登录时请用户通过隐藏输入或独立登录窗口操作，聊天中不收集密码。
+Historical test authorization and evidence are recorded in the development log. For future work, use the current conversation's authorization to determine whether clarification is needed. Administrator login should use hidden input or an independent login window; do not collect passwords in chat.
 
-## 示例与发行验证
+## Examples and distribution verification
 
-examples/read_only.py 演示登录查询；examples/session_usage.py 演示 SID 保存与退出。均需显式命令行参数，不在导入时联网。README 给出完整资源管理 API 示例。
+[read_only.py](examples/read_only.py) demonstrates login and inventory queries. [session_usage.py](examples/session_usage.py) demonstrates explicit SID persistence and logout. Both require command-line arguments and do not connect on import. The README includes resource-management examples.
 
-构建后在项目目录以外创建干净环境，用 `pip install --no-deps /absolute/path/to/wheel`，检查导入、get_profile()、三个离线 CLI 命令，确认不需要 discovery/ 或开发工作区。解压 sdist 并重新构建也必须成功。检查归档内容，不包含 work/、reports/、会话、原始抓包与缓存。
+After building, create a clean environment outside the project and install the wheel with `pip install --no-deps /absolute/path/to/wheel`. Verify imports, `get_profile()` and the three offline CLI commands without relying on `discovery/` or the development workspace. Extract and rebuild the sdist as well. Check archives for work directories, reports, sessions, raw captures and caches.
 
-版本号需同步 pyproject.toml 和 qnap_sdk/__init__.py，填写 CHANGELOG 和开发记录。项目使用 MIT 许可证；实际仓库 URL 由维护者确认，禁止填入虚构值。发布内部索引：`python -m twine upload --repository-url <approved-index> dist/*`；上传是单独授权的外部动作，本项目本次未上传。
+Keep versions synchronized in `pyproject.toml` and `qnap_sdk/__init__.py`; update the [changelog](CHANGELOG.md) and development record. Use the MIT license and the real repository URL. See the [PyPI publishing guide](docs/PUBLISHING.md) for the configured release workflow. Version 0.4.0 has already been published; never reuse an uploaded version.
+
+## Documentation languages
+
+English is the default for the root Markdown documents and `docs/`. Chinese translations live in `README-zh_cn.md` and `docs/zh_cn/`. Update both languages together, preserve code examples and API identifiers, and keep language switches and relative links valid. Include the Chinese README and translated guides in the source distribution. Documentation updates on GitHub do not replace README metadata in an already published PyPI version; it updates with the next release.

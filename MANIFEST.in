@@ -1,4 +1,4 @@
-include LICENSE README.md CHANGELOG.md CONTRIBUTING.md DEVELOPMENT_LOG.md pyproject.toml AGENTS.md
+include LICENSE README.md README-zh_cn.md CHANGELOG.md CONTRIBUTING.md DEVELOPMENT_LOG.md pyproject.toml AGENTS.md
 recursive-include qnap_sdk *.py *.json
 recursive-include docs *.md
 recursive-include examples *.py

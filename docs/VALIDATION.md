@@ -1,25 +1,35 @@
-# 验证记录
+# Validation record
 
-## 真实设备（2026-09-13）
+English | [Simplified Chinese](zh_cn/VALIDATION.md) | [Documentation](README.md)
 
-TS-873 / QTS 5.1.9.2954 build 20241120。原生 HTTP 直接传输，无浏览器。既有本地报告确认：
+## Live device regression — 2026-09-13
 
-- 登录、会话检查、注销后旧 SID 拒绝、重新登录、新 SID 保存：通过。
-- 用户、组、共享目录 CRUD；成员添加/移除：通过。
-- 用户和组共享权限 RO/RW/DENY 及撤销：通过。
-- 密码重置、禁用、保持禁用状态、重新启用：通过。
-- 测试资源清理、身份基线恢复：通过；无清理错误。
+Device: TS-873 / QTS 5.1.9.2954 build 20241120. Native HTTP transport, without a browser. Existing local reports confirm:
 
-本次包整理不重新执行远程变更。其他固件、QuTS hero、Windows、两步验证真实设备、配额/文件 ACL/应用权限不在此结论内。
+- Password login, SID checks, logout rejection of the old SID, relogin and saving a fresh session: passed.
+- User, group and shared-folder CRUD; membership addition/removal: passed.
+- User/group share permissions RO/RW/DENY and revocation: passed.
+- Password reset, disable, preservation of disabled state and re-enable: passed.
+- Test-resource cleanup and identity-baseline restoration: passed, with no cleanup errors.
 
-## 离线与发行
+Distribution and documentation work did not repeat remote mutations. These results do not establish compatibility with other firmware, QuTS hero or Windows, or verify real-device two-step authentication, quotas, file ACLs or application permissions.
 
-默认测试使用合成身份、脱敏 XML 和注入传输。离线 runner 同时禁止网络和进程创建，覆盖正常生命周期、写后不生效、分页无进展、错误不重试、会话过期、安全解析、凭证文件和 CLI。发行检查另验证 wheel 安装后内置 profile 可用、entry points 可运行和源码包重建。
+## Offline and distribution validation
 
-当前环境为 Python 3.12。精确测试数量、覆盖率及构建结果见本次完成后的本地 reports/，不将测试覆盖率等同于固件普遍兼容性。可选浏览器桥接及 dashboard 覆盖程度低于核心 SDK。
+Default tests use synthetic identities, anonymized XML and injected transports. The offline runner forbids network connections and subprocesses. Tests cover resource lifecycles, silently ignored writes, pagination without progress, failure without retries, session expiration, safe parsing, private credential files and the CLI.
 
-0.4.0 发行检查：65 项测试通过，总行覆盖率 81%，session.py 100%；Ruff 与 Twine 检查通过。干净虚拟环境安装 wheel 后导入、版本、内置契约及 CLI 正常；sdist 解压重建并执行全部离线测试通过。归档未包含会话、HAR、缓存、work/ 或 reports/。
+Initial 0.4.0 preparation passed 65 tests with 81% overall line coverage and 100% coverage for `session.py`. Ruff and Twine passed. A clean environment verified wheel imports, version, bundled contracts and CLI commands. The sdist was extracted, rebuilt and tested. Archives excluded sessions, HAR captures, caches, `work/` and `reports/`.
 
-自动发布配置验证：新增发行门禁测试后共 68 项离线测试通过。GitHub Linux CI 的 Python 3.11/3.12/3.13、Ruff、wheel/sdist 构建检查与隔离安装已通过（运行 34765889598）。工作流语法通过 actionlint。pypi 环境限制到 v* 标签；PyPI Trusted Publisher 绑定等待用户完成，尚未上传任何包。
+Release-gate tests subsequently increased the suite to 68 tests. Linux CI verified Python 3.11, 3.12 and 3.13, Ruff, wheel/sdist checks and isolated installation. Workflow syntax passed actionlint. The final workflow configuration passed [CI run 34766006491](https://github.com/AIInfraCareLabs/qnap-user-manager/actions/runs/34766006491). The `pypi` environment restricts deployment to `v*` tags.
 
-正式 PyPI 验证补充：发布运行 34766400639 重跑成功。0.4.0 官方索引安装后版本、内置 profile 与 CLI version/profiles/contracts 通过，验证使用干净虚拟环境及严格 TLS（显式 certifi CA）。尚未上传的早期状态为历史记录，当前版本已正式发布。
+Optional browser-bridge and dashboard coverage is lower than core SDK coverage. Coverage does not imply general firmware compatibility. Detailed local results remain in ignored `reports/` files.
+
+## Official PyPI verification
+
+[Publishing run 34766400639](https://github.com/AIInfraCareLabs/qnap-user-manager/actions/runs/34766400639) succeeded after retry. Version 0.4.0 was installed from the official PyPI index into a clean virtual environment. Version checks, bundled profiles and CLI `--version` / `profiles` / `contracts` all passed.
+
+The local Python default CA configuration was incomplete, so installation verification used an explicit trusted certifi CA bundle. TLS verification remained enabled. Earlier notes about an unpublished package describe historical stages; 0.4.0 is now published.
+
+## Documentation localization — 2026-09-14
+
+All 20 Markdown documents passed checks for English defaults, local link targets and Chinese README routing. The rebuilt sdist contains the Chinese README and all translated guides; wheel metadata reads the English README. Offline regression still passes all 68 tests. Twine and release archive checks passed. These local builds are validation artifacts, not a replacement for published 0.4.0 files.

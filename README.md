@@ -1,22 +1,24 @@
 # qnap-user-manager
 
-用于内部 QNAP 用户管理的 Python SDK。原生 HTTP 登录、会话检查与退出，以及用户、组、共享文件夹和共享权限管理均无需浏览器。运行时仅使用 Python 标准库，支持 Python 3.11+；Linux CI 已验证 Python 3.11、3.12、3.13；真实 NAS 回归使用 Python 3.12。
+English | [Simplified Chinese](README-zh_cn.md)
 
-**固件边界：仅已验证 QTS 5.1.9.2954（build 20241120，TS-873）。** 不自动套用到其他 QTS 或 QuTS hero。CGI 属于固件实现接口，并非 QNAP 官方稳定 SDK。配额、文件级 ACL 和应用权限尚未验证。
+A Python SDK for internal QNAP administration. Native HTTP login, session checks and logout, as well as user, group, shared-folder and share-permission management, work without a browser. The runtime uses only the Python standard library and requires Python 3.11+. Linux CI verifies Python 3.11, 3.12 and 3.13; live NAS regression used Python 3.12.
 
-## 安装
+**Verified firmware: QTS 5.1.9.2954 (build 20241120), on a TS-873.** Contracts are not automatically reused for other QTS versions or QuTS hero. These CGI endpoints are firmware implementation interfaces, not an official stable QNAP SDK. Quotas, file-level ACLs and application permissions remain unverified.
+
+## Installation
 
 ```sh
-# 官方 PyPI
+# Official PyPI
 python -m pip install qnap-user-manager==0.4.0
 qnap-manager --version
 qnap-manager profiles
 qnap-manager contracts
 ```
 
-发行包名为 `qnap-user-manager`，Python 导入名为 `qnap_sdk`。
+The distribution name is `qnap-user-manager`; the Python import name is `qnap_sdk`.
 
-## 登录和查询
+## Login and queries
 
 ```python
 from getpass import getpass
@@ -38,25 +40,25 @@ finally:
     client.logout()
 ```
 
-HTTPS 校验证书；自签名证书请配置 CA。仅明确需要明文 HTTP 时传 `allow_http=True`，密码 Base64 编码不提供加密。启用两步验证时，API 登录可传 `security_code`；CLI 尚未提供两步验证码参数。
+HTTPS validates certificates; supply a CA file for a self-signed certificate. Set `allow_http=True` only when plain HTTP is explicitly required. Base64 password encoding does not provide encryption. API authentication accepts `security_code` for two-step verification; the CLI does not yet expose that parameter.
 
-`close()` 和上下文退出只清除本地 SID。`logout()` 请求 NAS 注销并验证旧 SID 失效；退出失败仍清除本地 SID并抛出错误。SID 过期或 HTTP 401/403 会触发 `SessionExpired`。写请求不会自动重试；返回后通过只读接口验证状态，密码变更按专用接口结果校验。
+`close()` and context-manager exit clear only the local SID. `logout()` asks the NAS to revoke the session and verifies that the old SID is rejected. A failed logout still clears the local SID and raises an error. An expired SID or HTTP 401/403 raises `SessionExpired`; 403 can also indicate insufficient authorization. Write requests are never automatically retried. Changes use read-only requests to verify the resulting state; password changes check the dedicated endpoint's result fields.
 
-## 管理 API
+## Management API
 
-| 资源 | 查询 | 创建 | 修改 | 删除 |
+| Resource | Read | Create | Update | Delete |
 | --- | --- | --- | --- | --- |
-| 用户 | `users.list/list_all/get/groups` | `users.create` | `users.update/disable/enable/reset_password` | `users.delete` |
-| 组 | `groups.list/list_all/get/members` | `groups.create` | `groups.update/add_member/remove_member` | `groups.delete` |
-| 共享目录 | `shares.list/list_all/get` | `shares.create` | `shares.update` | `shares.delete` |
-| 共享权限 | `permissions.list/get` | `permissions.grant` | `permissions.set` | `permissions.revoke/delete` |
+| Users | `users.list/list_all/get/groups` | `users.create` | `users.update/disable/enable/reset_password` | `users.delete` |
+| Groups | `groups.list/list_all/get/members` | `groups.create` | `groups.update/add_member/remove_member` | `groups.delete` |
+| Shared folders | `shares.list/list_all/get` | `shares.create` | `shares.update` | `shares.delete` |
+| Share permissions | `permissions.list/get` | `permissions.grant` | `permissions.set` | `permissions.revoke/delete` |
 
-默认只读。操作正式资源必须在构造或认证时明确设置 `allow_writes=True`。测试模式可设置 `allow_test_writes=True`，限制资源名称及关联目标使用 `test_prefix`（默认 `sdk_test_`）。
+Clients are read-only by default. To change regular resources, explicitly set `allow_writes=True` when constructing or authenticating the client. Alternatively, `allow_test_writes=True` restricts resource names and related targets to `test_prefix`, which defaults to `sdk_test_`.
 
 ```python
 from qnap_sdk import Permission
 
-# client 已在登录时开启 allow_writes=True；以下调用会改变 NAS 状态。
+# Authenticate client with allow_writes=True before running these mutations.
 client.groups.create("research", description="Research team")
 client.users.create("alice", getpass("Initial password: "), groups=("research",))
 client.users.update("alice", description="Research member")
@@ -70,37 +72,41 @@ client.permissions.revoke("research", "research-data", subject_type="group")
 client.groups.remove_member("research", "alice")
 client.users.delete("alice")
 client.groups.delete("research")
-client.shares.delete("research-data")  # 默认保留磁盘文件
+client.shares.delete("research-data")  # Preserves files on disk by default.
 ```
 
-`volume` 是设备的卷 ID，请先在目标设备确认。`shares.delete(delete_files=True)` 会同时删除目录数据。权限可选 `RO`、`RW`、`DENY`；撤销删除显式规则，继承权限可能仍有效，结果分别提供 `permission` 与 `effective_permission`。创建用户后添加组成员、创建组后添加成员属于多个独立调用，失败时可能留下部分结果；需查询状态并补偿。
+`volume` is the device's volume ID; confirm it on the target NAS first. `shares.delete(delete_files=True)` also removes stored data. Permissions accept `RO`, `RW` or `DENY`. Revoking an explicit rule can leave inherited access in effect: results distinguish `permission` from `effective_permission`.
 
-密码创建与重置接受 1–64 个 UTF-8 字节，NAS 仍可能因自身密码策略拒绝。用户更新保留联系人信息，密码重置不改变禁用状态；共享目录更新保留未指定属性。
+Creating a user and adding group memberships, or creating a group and adding members, involves separate calls. A failure can leave partial results; inspect the current state and apply compensation as needed.
 
-## 会话文件与 CLI
+User creation and password reset accept 1–64 UTF-8 bytes, subject to the NAS password policy. User updates preserve contact information, password reset preserves disabled state, and shared-folder updates preserve properties that were not explicitly changed.
+
+## Session files and CLI
 
 ```sh
 qnap-manager login --origin https://nas.example.internal --username manager --session-file ./nas-session.txt
 qnap-manager logout --origin https://nas.example.internal --session-file ./nas-session.txt
 ```
 
-密码隐藏输入，不存储；SID 文件按 POSIX 0600 原子保存，读取拒绝公开权限、符号链接及异常内容。不要提交会话文件。CLI 原始 `call` 接受隐藏 SID 输入，输出只包含操作状态，具体参数请见 `--help` 和固件契约。
+Passwords are entered through a hidden prompt and are not stored. SID files are saved atomically with POSIX mode 0600. Loading rejects public permissions, symbolic links and invalid content. Do not commit session files. The raw CLI `call` command accepts a SID through hidden input and prints only operation status; see `--help` and the firmware contract for parameters.
 
-## 开发、示例和验证
+## Development, examples and validation
 
 ```sh
 python -m pip install -e '.[dev]'
-python tests/run_regression.py  # 阻止网络连接与子进程
+python tests/run_regression.py  # Forbids network connections and subprocesses.
 python -m pytest --cov=qnap_sdk --cov-report=term-missing
-python -m ruff check qnap_sdk tests examples
+python -m ruff check qnap_sdk tests examples scripts
 python -m build
 python -m twine check dist/*
 ```
 
-[开发指引](CONTRIBUTING.md)、[示例](examples/)、[开发关键记录](DEVELOPMENT_LOG.md)、[验证记录](docs/VALIDATION.md)、[兼容性](docs/COMPATIBILITY.md)。真实回归入口为 `tests/run_login_regression.py --help`，会登录并修改专用测试资源，仅用于获得授权的测试设备。
+See the [documentation index](docs/README.md), [development guide](CONTRIBUTING.md), [examples](examples/), [development record](DEVELOPMENT_LOG.md), [validation record](docs/VALIDATION.md) and [compatibility notes](docs/COMPATIBILITY.md).
 
-0.4.0 已通过 GitHub Actions Trusted Publishing 发布到 [PyPI](https://pypi.org/project/qnap-user-manager/0.4.0/)，并完成官方索引隔离安装验证。项目采用 [MIT 许可证](LICENSE)。
+`tests/run_login_regression.py --help` describes live regression. It authenticates and changes dedicated test resources; run it only against an authorized test device.
 
-## 自动发布
+Version 0.4.0 is published on [PyPI](https://pypi.org/project/qnap-user-manager/0.4.0/) through GitHub Actions Trusted Publishing, with official-index installation verified in a clean environment. The project uses the [MIT license](LICENSE).
 
-GitHub Actions 自动运行离线 CI。配置 PyPI Trusted Publisher 后，发布正式 GitHub Release 可自动上传发行包；详见 [PyPI 发布指引](docs/PUBLISHING.md)。main 推送不会自动发布。
+## Automated publishing
+
+GitHub Actions runs offline CI. With a PyPI Trusted Publisher configured, publishing an official GitHub Release uploads verified distributions automatically. See the [publishing guide](docs/PUBLISHING.md). Pushing `main` does not publish to PyPI.
