@@ -20,7 +20,7 @@
 
 将固件契约随 wheel 打包；新增 get_profile/available_profiles、公开版本与 CLI profiles/login/logout。会话文件采用原子写入与 0600 校验，拒绝符号链接和异常内容。完善响应对象/大小校验、认证 HTTP 401/403 清会话和密码 UTF-8 长度检查。
 
-新增离线 CLI、私密会话、原生传输失败与状态化资源生命周期测试；补充 README、开发指引、示例、源码包清单。运行时依赖为空。最终离线 65 项测试通过，总覆盖率 81%；Ruff、Twine、干净环境 wheel 安装与 sdist 重建/回归通过。发行准备不包含索引上传，现已按用户指令选择 MIT 许可证，仓库信息待确认。
+新增离线 CLI、私密会话、原生传输失败与状态化资源生命周期测试；补充 README、开发指引、示例、源码包清单。运行时依赖为空。最终离线 65 项测试通过，总覆盖率 81%；Ruff、Twine、干净环境 wheel 安装与 sdist 重建/回归通过。发行准备不包含索引上传，现已按用户指令选择 MIT 许可证，仓库为 https://github.com/AIInfraCareLabs/qnap-user-manager。
 
 ## 下次继续
 
@@ -28,8 +28,8 @@
 2. 公开固件契约位于 qnap_sdk/profiles/，discovery/endpoints.json 为镜像，保持一致。
 3. 增强真实新固件支持时先采集脱敏证据，新增独立 profile；不要修改版本标识伪造兼容。
 4. 优先候选：CLI 两步验证交互、Python 3.11/3.13 和 Windows 实测、创建资源多步骤补偿、细粒度文件 ACL 与应用权限、配额协议验证；AD/LDAP 需独立适配，不混入本地用户假设。
-5. 项目采用 MIT，实际 Git remote 待设置；设置后补充真实元数据、CI 与索引发布流程。保持新增功能与证据配套，记录版本、测试、限制和未完成项。
+5. 项目采用 MIT，实际 Git remote 使用 AIInfraCareLabs/qnap-user-manager；设置后补充真实元数据、CI 与索引发布流程。保持新增功能与证据配套，记录版本、测试、限制和未完成项。
 
 ## 2026-09-13：MIT 与 GitHub 提交准备
 
-用户授权 MIT 许可及提交 GitHub。版权人使用本机已配置 Git 作者 puluto，加入 LICENSE、SPDX MIT 包元数据与发行许可证文件。GitHub 目标仓库和可见性需用户提供；不据内部工具定位擅自公开。仅提交源码、脱敏契约、文档和测试，原始发现报告与本地会话不提交。
+用户授权 MIT 许可及提交 GitHub。版权人使用本机已配置 Git 作者 puluto，加入 LICENSE、SPDX MIT 包元数据与发行许可证文件。用户已指定 AIInfraCareLabs 组织及公开仓库，仓库名使用 qnap-user-manager。仅提交源码、脱敏契约、文档和测试，原始发现报告与本地会话不提交。
