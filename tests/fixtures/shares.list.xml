@@ -1,0 +1,18 @@
+<QDocRoot version="1.0">
+<authPassed>1</authPassed><model>ANONYMIZED<modelName>ANONYMIZED</modelName><internalModelName>TS-XA73</internalModelName><platform>TS-NASX86</platform><platform_ex>X86_MERLINFALCON</platform_ex><customModelName /><displayModelName>TS-873</displayModelName><sas_model>0</sas_model><storage_v2>1</storage_v2>
+<encryptfsSupported>1</encryptfsSupported><is_zfs>0</is_zfs><node /><dual_node /></model>
+<firmware><name>QTS</name><version>5.1.9</version><number>2954</number><build>20241120</build><patch>0</patch><buildTime>2024/11/20</buildTime></firmware>
+<rfs_bits>64</rfs_bits><specVersion>1.0</specVersion><hostname>ANONYMIZED</hostname><DemoSiteSuppurt>no</DemoSiteSuppurt><customLogo><customFrontLogo /><customLoginLogo /></customLogo>
+<gqMaster>-1</gqMaster><func><name>S_MENU_16</name><ownContent><shareInfo><supportACL>1</supportACL><ACLEnabled>0</ACLEnabled><WinACLSupport>1</WinACLSupport><WinACLEnabled>0</WinACLEnabled><ABEEnabled>0</ABEEnabled><supportDmPc>0</supportDmPc><defShareCount>2</defShareCount><defShareList>Public/TMBackup</defShareList><no_del_count>0</no_del_count><no_setup_count>1</no_setup_count><no_setup_list><no_setup_info><share_name>TMBackup</share_name></no_setup_info>
+</no_setup_list>
+<shareCount>2</shareCount>	<data>
+<share>	<checkbox>checkbox</checkbox>
+<shareName>fixture_shareName_0</shareName><lTime>--</lTime><sizeRaw>-1</sizeRaw><uSize>-1</uSize><dCnt>-1</dCnt><fCnt>-1</fCnt><hidden>0</hidden><aRight>-1</aRight><cmt>-1</cmt><unit>-1</unit><webdav>1</webdav><valid_path>1</valid_path><noSupportACL>0</noSupportACL><EncryptData>0</EncryptData><enable_ksmbd>1</enable_ksmbd><enc_migrate_type>0</enc_migrate_type><enc_migrate_status>0</enc_migrate_status><enc_migrate_percent>0</enc_migrate_percent><savekey>--</savekey><encrypted>0</encrypted><on_demand_tiering>-1</on_demand_tiering></share>
+<share>	<checkbox>checkbox</checkbox>
+<shareName>fixture_shareName_1</shareName><lTime>--</lTime><sizeRaw>-1</sizeRaw><uSize>-1</uSize><dCnt>-1</dCnt><fCnt>-1</fCnt><hidden>0</hidden><aRight>-1</aRight><cmt>-1</cmt><unit>-1</unit><webdav>1</webdav><valid_path>1</valid_path><noSupportACL>0</noSupportACL><EncryptData>0</EncryptData><enable_ksmbd>1</enable_ksmbd><enc_migrate_type>0</enc_migrate_type><enc_migrate_status>0</enc_migrate_status><enc_migrate_percent>0</enc_migrate_percent><savekey>--</savekey><encrypted>0</encrypted><on_demand_tiering>-1</on_demand_tiering></share>
+	</data>
+	<ret>0</ret>
+</shareInfo>
+</ownContent>
+</func>
+</QDocRoot>

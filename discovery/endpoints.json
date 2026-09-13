@@ -1,0 +1,1404 @@
+{
+  "firmware": "QTS 5.1.9.2954",
+  "build": "20241120",
+  "operations": {
+    "users.list": {
+      "verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privRequest.cgi",
+      "fixed": {
+        "subfunc": "user",
+        "getdata": 1,
+        "sort": 13,
+        "type": 0,
+        "refresh": 0,
+        "force_2sv_flag": 0
+      },
+      "parameters": [
+        "lower",
+        "upper",
+        "filter"
+      ],
+      "defaults": {
+        "lower": 0,
+        "upper": 10,
+        "filter": ""
+      },
+      "query_parameters": [
+        "subfunc",
+        "sid",
+        "getdata",
+        "sort",
+        "force_2sv_flag"
+      ],
+      "session_parameter": "sid",
+      "success": {
+        "field": "userroot.ret",
+        "values": [
+          "0"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "model": {
+        "items_path": "userroot.data.user",
+        "fields": {
+          "username": "username",
+          "uid": "userid",
+          "description": "description",
+          "disabled": "user_enable"
+        },
+        "count_path": "userroot.count",
+        "transforms": {
+          "disabled": "invert_bool"
+        }
+      },
+      "evidence": [
+        {
+          "record": 149,
+          "response_sha256": "a069ee49cad7a75f9cb88a37535ae019a3bf32d4cad9b591e1d091b2fcd8b2d5",
+          "source": "Independent QTS UI capture; query defaults cross-checked against downloaded frontend"
+        }
+      ]
+    },
+    "groups.list": {
+      "verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privRequest.cgi",
+      "fixed": {
+        "subfunc": "group",
+        "getdata": 1,
+        "sort": 13,
+        "type": 0,
+        "refresh": 0
+      },
+      "parameters": [
+        "lower",
+        "upper",
+        "filter"
+      ],
+      "defaults": {
+        "lower": 0,
+        "upper": 10,
+        "filter": ""
+      },
+      "query_parameters": [
+        "subfunc",
+        "sid",
+        "getdata",
+        "sort"
+      ],
+      "session_parameter": "sid",
+      "success": {
+        "field": "grouproot.ret",
+        "values": [
+          "0"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "model": {
+        "items_path": "grouproot.data.group",
+        "fields": {
+          "name": "groupname",
+          "description": "description"
+        },
+        "count_path": "grouproot.count"
+      },
+      "evidence": [
+        {
+          "record": 177,
+          "response_sha256": "52ea885281c11fe1b9b124436588d9f37181493cd8931b4a3c9ee758c0d7a4c3",
+          "source": "Independent QTS UI capture; query defaults cross-checked against downloaded frontend"
+        }
+      ]
+    },
+    "shares.list": {
+      "verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privRequest.cgi",
+      "fixed": {
+        "subfunc": "share"
+      },
+      "parameters": [],
+      "defaults": {},
+      "query_parameters": [
+        "subfunc",
+        "sid"
+      ],
+      "session_parameter": "sid",
+      "success": {
+        "field": "func.ownContent.shareInfo.ret",
+        "values": [
+          "0"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "model": {
+        "items_path": "func.ownContent.shareInfo.data.share",
+        "fields": {
+          "name": "shareName"
+        },
+        "count_path": "func.ownContent.shareInfo.shareCount"
+      },
+      "evidence": [
+        {
+          "record": 223,
+          "response_sha256": "8e26df297550a75dc027b0e7dff65edf216ad3ab325aa44239d77fdc39fd1637",
+          "source": "Independent QTS UI capture; query defaults cross-checked against downloaded frontend"
+        }
+      ]
+    },
+    "users.get": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "type": 0,
+        "wiz_func": "user_edit"
+      },
+      "parameters": [
+        "userName"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": null,
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "aec8822db2617979fdd940576051c869292c1156fc642742426d823df58d19ac"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "model": {
+        "items_path": "userInfo",
+        "fields": {
+          "username": "username",
+          "uid": "uid",
+          "description": "description",
+          "disabled": "chk_disable"
+        }
+      }
+    },
+    "users.create": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/wizReq.cgi",
+      "fixed": {
+        "create_priv": 0,
+        "rd_share_len": 0,
+        "rw_share_len": 0,
+        "no_share_len": 0,
+        "send_mail": 0,
+        "a_email": "",
+        "wiz_func": "user_create",
+        "action": "add_user",
+        "gp_len": 1,
+        "gp0": "everyone"
+      },
+      "parameters": [
+        "a_username",
+        "a_passwd",
+        "a_description"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "a_username",
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "5c96f1012f18e2fa173e1641cfe9a919d7d2f2ab80c3b5cb25abba6585412bc2"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "operation": "users.get",
+        "parameters": {
+          "userName": "$target"
+        },
+        "checks": [
+          {
+            "field": "userInfo.username",
+            "parameter": "a_username"
+          },
+          {
+            "field": "userInfo.description",
+            "parameter": "a_description"
+          }
+        ]
+      }
+    },
+    "users.update": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "type": 0,
+        "wiz_func": "user_edit",
+        "action": "account_edit"
+      },
+      "parameters": [
+        "username",
+        "a_description",
+        "a_enable",
+        "a_expire",
+        "a_uid",
+        "year",
+        "month",
+        "day",
+        "a_email",
+        "a_tel_country_code",
+        "a_tel"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "username",
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "f8341d18247fb3d4e5a8f1fcc7afe975e179c429af240f587b8760c8b91e30a8"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "operation": "users.get",
+        "parameters": {
+          "userName": "$target"
+        },
+        "checks": [
+          {
+            "field": "userInfo.username",
+            "parameter": "username"
+          },
+          {
+            "field": "userInfo.description",
+            "parameter": "a_description"
+          },
+          {
+            "field": "userInfo.chk_disable",
+            "parameter": "a_enable",
+            "transform": "invert_bool"
+          }
+        ]
+      }
+    },
+    "groups.get": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "wiz_func": "group_user_detail"
+      },
+      "parameters": [
+        "groupname"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": null,
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "6104fcd9397e9fb4a20c4da4fb62bb0e50c328cc6b63b3e19713413ec4587965"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "model": {
+        "items_path": "group",
+        "fields": {
+          "name": "groupName",
+          "description": "description"
+        }
+      }
+    },
+    "groups.create": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/wizReq.cgi",
+      "fixed": {
+        "users_count": 0,
+        "select_user": 0,
+        "wiz_func": "user_group_create",
+        "action": "add_group"
+      },
+      "parameters": [
+        "new_groupname",
+        "a_description"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "new_groupname",
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "5c96f1012f18e2fa173e1641cfe9a919d7d2f2ab80c3b5cb25abba6585412bc2"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "operation": "groups.get",
+        "parameters": {
+          "groupname": "$target"
+        },
+        "checks": [
+          {
+            "field": "group.groupName",
+            "parameter": "new_groupname"
+          },
+          {
+            "field": "group.description",
+            "parameter": "a_description"
+          }
+        ]
+      }
+    },
+    "groups.update": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "wiz_func": "group_user_detail",
+        "action": "group_user_edit"
+      },
+      "parameters": [
+        "groupname",
+        "a_description"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "groupname",
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "4f232aaf9a193c709283eab557f38278e9cb1269a220bb9d4fce3cd88263c055"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "operation": "groups.get",
+        "parameters": {
+          "groupname": "$target"
+        },
+        "checks": [
+          {
+            "field": "group.groupName",
+            "parameter": "groupname"
+          },
+          {
+            "field": "group.description",
+            "parameter": "a_description"
+          }
+        ]
+      }
+    },
+    "groups.members": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "getdata": 1,
+        "refresh": 0,
+        "sort": 13,
+        "filter": "",
+        "type": 0,
+        "wiz_func": "group_user_edit"
+      },
+      "parameters": [
+        "groupname",
+        "lower",
+        "upper"
+      ],
+      "query_parameters": [
+        "sid",
+        "getdata",
+        "refresh",
+        "sort",
+        "groupname",
+        "wiz_func"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": null,
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "955b5f51110df1ad6797bb698f6f5ceb6cfdc778fe8438bad36181b561289fd8"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      }
+    },
+    "groups.members_update": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "wiz_func": "group_user_edit",
+        "action": "group_user_edit"
+      },
+      "parameters": [
+        "groupname",
+        "select_user",
+        "unselect_user",
+        "select_user_len",
+        "unselect_user_len"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "groupname",
+      "scoped_parameters": [
+        "select_user",
+        "unselect_user"
+      ],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "c2cbd3ae1b0d4ed2782af97782f85fe727b2592139b9d4ca067da257c8ccf0f6"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "operation": "groups.members",
+        "parameters": {
+          "groupname": "$target",
+          "lower": 0,
+          "upper": 10
+        },
+        "checks": [
+          {
+            "field": "func.ownContent.ownUser",
+            "parameter": "select_user",
+            "contains": true,
+            "default": ""
+          },
+          {
+            "field": "func.ownContent.ownUser",
+            "parameter": "unselect_user",
+            "contains": false,
+            "default": ""
+          }
+        ]
+      }
+    },
+    "users.groups": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "getdata": 1,
+        "refresh": 0,
+        "sort": 13,
+        "filter": "",
+        "type": 0,
+        "wiz_func": "user_group_edit"
+      },
+      "parameters": [
+        "userName",
+        "lower",
+        "upper"
+      ],
+      "query_parameters": [
+        "sid",
+        "getdata",
+        "refresh",
+        "sort",
+        "userName",
+        "wiz_func"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": null,
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "23d3423592813943b70061d0c913735ee8da9083f3fc415e996136ab091c166b"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      }
+    },
+    "shares.create_options": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/wizReq.cgi",
+      "fixed": {
+        "wiz_func": "share_create"
+      },
+      "parameters": [],
+      "query_parameters": [
+        "sid",
+        "wiz_func"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": null,
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "4e0db4b6dee529a225d792ca2b41a56c1d0e1aabe1c2414ea05076251c5e501e"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      }
+    },
+    "shares.get": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "wiz_func": "share_property"
+      },
+      "parameters": [
+        "sharename"
+      ],
+      "query_parameters": [
+        "sid",
+        "sharename",
+        "wiz_func"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": null,
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "2e0709a458fa577308e081089c92bb5b4d7909aef9d6c7776bf4130908265a46"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "model": {
+        "items_path": "shareProperty",
+        "fields": {
+          "name": "shareName",
+          "description": "comment",
+          "path": "path"
+        }
+      }
+    },
+    "shares.create": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/wizReq.cgi",
+      "fixed": {
+        "path_type": "auto",
+        "hidden": "no",
+        "oplocks": "yes",
+        "access_r": "admin_only",
+        "guest": "deny",
+        "recycle_bin": 0,
+        "recycle_bin_administrators_only": 0,
+        "qsync": 0,
+        "quotaRadio": 0,
+        "quota_size": "",
+        "wiz_func": "share_create",
+        "action": "add_share"
+      },
+      "parameters": [
+        "share_name",
+        "comment",
+        "vol_no"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "share_name",
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "f29191ac30673a993e93908bfb237fbac8a2a783afe87f1d62ca16e700712e70"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "operation": "shares.get",
+        "parameters": {
+          "sharename": "$target"
+        },
+        "checks": [
+          {
+            "field": "shareProperty.shareName",
+            "parameter": "share_name"
+          },
+          {
+            "field": "shareProperty.comment",
+            "parameter": "comment"
+          }
+        ]
+      }
+    },
+    "shares.update": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "wiz_func": "share_property",
+        "action": "share_property"
+      },
+      "parameters": [
+        "old_sname",
+        "new_sname",
+        "share_comment",
+        "manual_path",
+        "vol_no",
+        "share_hidden",
+        "oplocks",
+        "mangled_names",
+        "EncryptData",
+        "ftp_wonly",
+        "recycle_bin",
+        "recycle_bin_administrators_only",
+        "qsync",
+        "hide_unreadable",
+        "share_enumeration",
+        "timemachine",
+        "showSnapshots"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "old_sname",
+      "scoped_parameters": [
+        "new_sname"
+      ],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "0ee3f432ed1a24f4b197157606d108b6fd0829ed9491b2482694bd83c0cd771a"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "operation": "shares.get",
+        "parameters": {
+          "sharename": "$new_sname"
+        },
+        "checks": [
+          {
+            "field": "shareProperty.shareName",
+            "parameter": "new_sname"
+          },
+          {
+            "field": "shareProperty.comment",
+            "parameter": "share_comment"
+          },
+          {
+            "field": "shareProperty.hidden",
+            "parameter": "share_hidden"
+          }
+        ]
+      }
+    },
+    "permissions.user_get": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "getdata": 1,
+        "filter": "",
+        "type": 0,
+        "wiz_func": "user_share_edit"
+      },
+      "parameters": [
+        "userName",
+        "lower",
+        "upper"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": null,
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "82b1d748449065d208b1188a593848298eae8abc66d6c419a99cd3d3c7aa147c"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      }
+    },
+    "permissions.group_get": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": true,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "getdata": 1,
+        "filter": "",
+        "type": 2,
+        "wiz_func": "user_share_edit"
+      },
+      "parameters": [
+        "groupName",
+        "lower",
+        "upper"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": null,
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "c06b426da164b591fc67087a48362b840c7fcb6511bd532b64ba388a60d1913a"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      }
+    },
+    "permissions.user_set": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "recursive": 0,
+        "wiz_func": "user_share_edit",
+        "action": "user_share_edit"
+      },
+      "parameters": [
+        "username",
+        "rd_share_len",
+        "rw_share_len",
+        "no_share_len",
+        "empty_share_len",
+        "rd_share0",
+        "rw_share0",
+        "no_share0",
+        "empty_share0"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "username",
+      "scoped_parameters": [
+        "rd_share0",
+        "rw_share0",
+        "no_share0",
+        "empty_share0"
+      ],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "95803fa129d28eb0fb6233c9348c575e2476e049ddb93d382f7b633039a5b883"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "notes": "Typed permissions facade confirms changed explicit type with a fresh read; HTTP authPassed alone is not proof of permission change.",
+      "verification": {
+        "kind": "permission",
+        "operation": "permissions.user_get",
+        "subject_parameter": "userName"
+      }
+    },
+    "permissions.group_set": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "recursive": 0,
+        "wiz_func": "group_share_edit",
+        "action": "group_share_edit"
+      },
+      "parameters": [
+        "groupname",
+        "rd_share_len",
+        "rw_share_len",
+        "no_share_len",
+        "empty_share_len",
+        "rd_share0",
+        "rw_share0",
+        "no_share0",
+        "empty_share0"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "groupname",
+      "scoped_parameters": [
+        "rd_share0",
+        "rw_share0",
+        "no_share0",
+        "empty_share0"
+      ],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live authorized dedicated test resources; post-write readback",
+          "response_sha256": "4f232aaf9a193c709283eab557f38278e9cb1269a220bb9d4fce3cd88263c055"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "notes": "Typed permissions facade confirms changed explicit type with a fresh read; HTTP authPassed alone is not proof of permission change.",
+      "verification": {
+        "kind": "permission",
+        "operation": "permissions.group_get",
+        "subject_parameter": "groupName"
+      }
+    },
+    "users.delete": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privRequest.cgi",
+      "fixed": {
+        "subfunc": "user",
+        "apply": 1,
+        "fork_del": 1,
+        "del_cnt": 1,
+        "delete_userhome": 0
+      },
+      "parameters": [
+        "user_list"
+      ],
+      "query_parameters": [
+        "sid"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "user_list",
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live dedicated resource deletion; SDK confirmed original list counts restored",
+          "response_sha256": "5c96f1012f18e2fa173e1641cfe9a919d7d2f2ab80c3b5cb25abba6585412bc2"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "kind": "absence",
+        "operation": "users.list",
+        "parameters": {},
+        "collection": "userroot.data.user",
+        "identity": "username",
+        "count_field": "userroot.count"
+      }
+    },
+    "groups.delete": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privRequest.cgi",
+      "fixed": {
+        "subfunc": "group",
+        "apply": 1,
+        "del_cnt": 1
+      },
+      "parameters": [
+        "group_list"
+      ],
+      "query_parameters": [
+        "sid",
+        "subfunc",
+        "apply",
+        "del_cnt"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "group_list",
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live dedicated resource deletion; SDK confirmed original list counts restored",
+          "response_sha256": "5c96f1012f18e2fa173e1641cfe9a919d7d2f2ab80c3b5cb25abba6585412bc2"
+        }
+      ],
+      "success": {
+        "field": "authPassed",
+        "values": [
+          "1"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "kind": "absence",
+        "operation": "groups.list",
+        "parameters": {},
+        "collection": "grouproot.data.group",
+        "identity": "groupname",
+        "count_field": "grouproot.count"
+      }
+    },
+    "shares.delete": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privRequest.cgi",
+      "fixed": {
+        "subfunc": "share",
+        "apply": 1,
+        "del_cnt": 1,
+        "stop_service": "no"
+      },
+      "parameters": [
+        "share_list",
+        "delsymboliconly"
+      ],
+      "query_parameters": [
+        "sid"
+      ],
+      "session_parameter": "sid",
+      "target_parameter": "share_list",
+      "scoped_parameters": [],
+      "evidence": [
+        {
+          "source": "QTS 5.1.9 downloaded frontend",
+          "status": "Static contract; pending live readback"
+        },
+        {
+          "source": "Live dedicated resource deletion; SDK confirmed original list counts restored",
+          "response_sha256": "3775fad1fb7acdbac69d1404426b960ea1a9bdf83101f6cbc33bd727e4366953"
+        }
+      ],
+      "success": {
+        "field": "func.ownContent.return",
+        "values": [
+          "0"
+        ]
+      },
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "verification": {
+        "kind": "absence",
+        "operation": "shares.list",
+        "parameters": {},
+        "collection": "func.ownContent.shareInfo.data.share",
+        "identity": "shareName",
+        "count_field": "func.ownContent.shareInfo.shareCount"
+      },
+      "defaults": {
+        "delsymboliconly": 1
+      }
+    },
+    "users.set_password": {
+      "verified": true,
+      "source_verified": true,
+      "read_only": false,
+      "method": "POST",
+      "path": "/cgi-bin/priv/privWizard.cgi",
+      "fixed": {
+        "wiz_func": "user_password_edit",
+        "action": "user_password_edit",
+        "need_check": "no",
+        "old_password": ""
+      },
+      "parameters": [
+        "username",
+        "password"
+      ],
+      "query_parameters": [
+        "sid",
+        "wiz_func",
+        "action"
+      ],
+      "target_parameter": "username",
+      "success": {
+        "field": "func.userPasswordEdit.passwordChange",
+        "values": [
+          "0"
+        ]
+      },
+      "success_checks": [
+        {
+          "field": "func.userPasswordEdit.passwordCheck",
+          "values": [
+            "0"
+          ]
+        }
+      ],
+      "session_expired": {
+        "field": "authPassed",
+        "values": [
+          "0"
+        ]
+      },
+      "evidence": [
+        {
+          "source": "QTS user management frontend: admin password reset uses need_check=no; passwordCheck/passwordChange both zero required"
+        },
+        {
+          "source": "Live approved disposable account; passwordCheck=0 and passwordChange=0"
+        }
+      ]
+    }
+  },
+  "unverified": [
+    "quota.get",
+    "quota.set"
+  ]
+}

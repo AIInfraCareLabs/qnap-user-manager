@@ -1,0 +1,27 @@
+<QDocRoot version="1.0">
+<authPassed>1</authPassed><model>ANONYMIZED<modelName>ANONYMIZED</modelName><internalModelName>TS-XA73</internalModelName><platform>TS-NASX86</platform><platform_ex>X86_MERLINFALCON</platform_ex><customModelName /><displayModelName>TS-873</displayModelName><sas_model>0</sas_model><storage_v2>1</storage_v2>
+<encryptfsSupported>1</encryptfsSupported><is_zfs>0</is_zfs><node /><dual_node /></model>
+<firmware><name>QTS</name><version>5.1.9</version><number>2954</number><build>20241120</build><patch>0</patch><buildTime>2024/11/20</buildTime></firmware>
+<rfs_bits>64</rfs_bits><specVersion>1.0</specVersion><hostname>ANONYMIZED</hostname><DemoSiteSuppurt>no</DemoSiteSuppurt><customLogo><customFrontLogo /><customLoginLogo /></customLogo>
+<gqMaster>-1</gqMaster><grouproot>
+	<done>1</done>
+	<timeout>0</timeout>
+<supportACL>1</supportACL><ACLEnabled>0</ACLEnabled><ADSSupport>1</ADSSupport><trustedDomain><enable>0</enable></trustedDomain>
+<ADS_OU>0</ADS_OU>	<count>3</count>
+	<data>
+<group>
+	<checkbox>checkbox</checkbox>
+<groupname>fixture_groupname_0</groupname><groupid>0</groupid><groupQuota>--</groupQuota><description /><is_force_2sv_en>0</is_force_2sv_en>	<action>action</action>
+</group>
+<group>
+	<checkbox>checkbox</checkbox>
+<groupname>fixture_groupname_1</groupname><groupid>100</groupid><groupQuota>--</groupQuota><description /><is_force_2sv_en>0</is_force_2sv_en>	<action>action</action>
+</group>
+<group>
+	<checkbox>checkbox</checkbox>
+<groupname>fixture_groupname_2</groupname><groupid>1000</groupid><groupQuota>--</groupQuota><description /><is_force_2sv_en>0</is_force_2sv_en>	<action>action</action>
+</group>
+	</data>
+	<ret>0</ret>
+</grouproot>
+</QDocRoot>

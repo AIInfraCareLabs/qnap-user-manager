@@ -1,0 +1,28 @@
+<QDocRoot version="1.0">
+<authPassed>1</authPassed><model>ANONYMIZED<modelName>ANONYMIZED</modelName><internalModelName>TS-XA73</internalModelName><platform>TS-NASX86</platform><platform_ex>X86_MERLINFALCON</platform_ex><customModelName /><displayModelName>TS-873</displayModelName><sas_model>0</sas_model><storage_v2>1</storage_v2>
+<encryptfsSupported>1</encryptfsSupported><is_zfs>0</is_zfs><node /><dual_node /></model>
+<firmware><name>QTS</name><version>5.1.9</version><number>2954</number><build>20241120</build><patch>0</patch><buildTime>2024/11/20</buildTime></firmware>
+<rfs_bits>64</rfs_bits><specVersion>1.0</specVersion><hostname>ANONYMIZED</hostname><DemoSiteSuppurt>no</DemoSiteSuppurt><customLogo><customFrontLogo /><customLoginLogo /></customLogo>
+<gqMaster>-1</gqMaster><userroot>
+<supportACL>1</supportACL><ACLEnabled>0</ACLEnabled><UserHomeEnabled>0</UserHomeEnabled><UserHomeVolume>-1</UserHomeVolume><ADSSupport>1</ADSSupport><trustedDomain><enable>0</enable></trustedDomain>
+<ADS_OU>0</ADS_OU>	<done>1</done>
+	<timeout>0</timeout>
+	<count>3</count>
+	<quotaenable>false</quotaenable><supportImportUser>1</supportImportUser>	<data>
+<user>
+	<checkbox>checkbox</checkbox>
+<username>fixture_username_0</username><userid>0</userid><QuotaSize>--</QuotaSize><QuotaUsedSize>--</QuotaUsedSize><fullname /><email /><description /><tel_country_code /><tel /><user_enable>0</user_enable><user_account_expiry>0</user_account_expiry>	<action>action</action>
+</user>
+<user>
+	<checkbox>checkbox</checkbox>
+<username>fixture_username_1</username><userid>1000</userid><QuotaSize>--</QuotaSize><QuotaUsedSize>--</QuotaUsedSize><fullname /><email /><description /><tel_country_code /><tel /><user_enable>1</user_enable><user_account_expiry>0</user_account_expiry>	<action>action</action>
+</user>
+<user>
+	<checkbox>checkbox</checkbox>
+<username>fixture_username_2</username><userid>1001</userid><QuotaSize>--</QuotaSize><QuotaUsedSize>--</QuotaUsedSize><fullname /><email /><description /><tel_country_code /><tel /><user_enable>0</user_enable><user_account_expiry>0</user_account_expiry>	<action>action</action>
+</user>
+	</data>
+	<ret>0</ret>
+</userroot>
+<passwdConstraints><passwdConstraint01>0</passwdConstraint01><passwdConstraint02>0</passwdConstraint02><passwdConstraint03>0</passwdConstraint03><passwdConstraint04>0</passwdConstraint04><pw_constraint01_opt>7</pw_constraint01_opt><pw_constraint01_letter>0</pw_constraint01_letter><pw_min_limit_en>1</pw_min_limit_en><pw_min_limit>8</pw_min_limit></passwdConstraints>
+</QDocRoot>

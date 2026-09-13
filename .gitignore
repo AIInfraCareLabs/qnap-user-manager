@@ -1,0 +1,23 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.env
+*.har
+*credentials*
+*params-private*
+.venv/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+coverage.xml
+reports/
+nas-session*
+
+# Local discovery reports and browser probes are not public source artifacts.
+discovery/*
+!discovery/endpoints.json
+
+.DS_Store
