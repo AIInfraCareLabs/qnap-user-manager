@@ -7,8 +7,8 @@
 ## 安装
 
 ```sh
-# 内部 wheel，或发布到内部索引后 pip install qnap-user-manager==0.4.0
-python -m pip install dist/qnap_user_manager-0.4.0-py3-none-any.whl
+# 官方 PyPI
+python -m pip install qnap-user-manager==0.4.0
 qnap-manager --version
 qnap-manager profiles
 qnap-manager contracts
@@ -99,7 +99,7 @@ python -m twine check dist/*
 
 [开发指引](CONTRIBUTING.md)、[示例](examples/)、[开发关键记录](DEVELOPMENT_LOG.md)、[验证记录](docs/VALIDATION.md)、[兼容性](docs/COMPATIBILITY.md)。真实回归入口为 `tests/run_login_regression.py --help`，会登录并修改专用测试资源，仅用于获得授权的测试设备。
 
-当前已生成可安装的 wheel 和源码包，尚未上传任何索引。项目采用 [MIT 许可证](LICENSE)。对外发布前请确认包名和元数据；内部发布亦请配置目标索引和权限。
+0.4.0 已通过 GitHub Actions Trusted Publishing 发布到 [PyPI](https://pypi.org/project/qnap-user-manager/0.4.0/)，并完成官方索引隔离安装验证。项目采用 [MIT 许可证](LICENSE)。
 
 ## 自动发布
 

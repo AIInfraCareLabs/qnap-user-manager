@@ -49,3 +49,9 @@ GitHub 早期设备授权连接曾因 EOF / 超时失败。用户随后完成系
 ## 首次 PyPI 发布诊断
 
 用户确认完成绑定后创建正式 v0.4.0 Release，标签对应 54392e4。发布运行 34766400639 的版本检查、三个 Python 测试与构建全通过，但上传前 OIDC 交换返回 invalid-publisher（matching publisher not found），未上传文件。实际身份为 AIInfraCareLabs/qnap-user-manager，workflow publish.yml，environment pypi，组织 ID 289012739。已查 PyPI 官方 GitHubPublisherMixin：查找按 repo owner/name/owner_id/workflow filename/environment，sub 为 unchecked，不能将此次失败归因于 GitHub 新 immutable subject。需核对用户账号内实际 Pending Publisher 记录及是否配置在正式 PyPI；更正后 gh run rerun 34766400639 --failed，无需重建 Release 或改标签。
+
+## PyPI 0.4.0 发布成功
+
+用户提供 Pending Publisher 截图，仓库/workflow/environment 与预期一致。对运行 34766400639 执行 --failed 重跑后成功，0.4.0 wheel/sdist 已上传正式 PyPI，GitHub Release v0.4.0 保持原标签与提交。未修改工作流，首次 invalid-publisher 的具体原因尚未确定，不记为已修复的代码缺陷。
+
+干净虚拟环境使用 --isolated、官方索引 https://pypi.org/simple、--no-cache-dir 和 --no-deps 安装成功。版本 0.4.0、内置 profile、CLI version/profiles/contracts 均通过；本机默认 Python CA 不完整，验证时指定现有 certifi CA，未关闭 TLS。后续版本遵循 docs/PUBLISHING.md，不重用已发布版本号；账号凭据不落入仓库。
