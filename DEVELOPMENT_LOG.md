@@ -33,3 +33,5 @@
 ## 2026-09-13：MIT 与 GitHub 提交准备
 
 用户授权 MIT 许可及提交 GitHub。版权人使用本机已配置 Git 作者 puluto，加入 LICENSE、SPDX MIT 包元数据与发行许可证文件。用户已指定 AIInfraCareLabs 组织及公开仓库，仓库名使用 qnap-user-manager。仅提交源码、脱敏契约、文档和测试，原始发现报告与本地会话不提交。
+
+GitHub 状态：公开目标和 origin 已配置，本地提交完成；GitHub CLI 尚未登录。设备授权 POST 因 unexpected EOF / 连接超时失败，尚未创建远程仓库或推送。下一次先完成 gh auth login（默认系统凭据存储，禁止 insecure-storage），再检查组织中目标仓库是否存在，创建公开仓库并推送 main；存在时先检查历史，禁止强推。CLI 下载在本地 work/github-cli/，不会提交。
