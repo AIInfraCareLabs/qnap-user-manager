@@ -46,7 +46,7 @@ qnap-manager --version
 
 ## 当前状态
 
-仓库内的 CI 与发布配置已完成；GitHub 环境通过 API 配置。PyPI 账号的 Trusted Publisher 必须在登录的 PyPI 账号中添加，未绑定前正式发布会失败。本次配置不创建正式 Release，也不直接上传包。
+仓库内的 CI 与发布配置已完成；GitHub 环境通过 API 配置。用户确认绑定后已创建 v0.4.0 正式 Release；首次运行 34766400639 在 OIDC 交换时报 invalid-publisher，尚未上传包。核对正式 PyPI 的绑定 owner/repo/workflow/environment 后，重跑失败任务：`gh run rerun 34766400639 --repo AIInfraCareLabs/qnap-user-manager --failed`，不要重新创建 Release 或移动标签。
 
 官方参考：
 

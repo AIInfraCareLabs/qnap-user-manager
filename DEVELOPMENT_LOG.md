@@ -45,3 +45,7 @@ GitHub 早期设备授权连接曾因 EOF / 超时失败。用户随后完成系
 新增 ci.yml（Python 3.11/3.12/3.13 离线测试、Ruff、构建、发行检查及隔离安装）与 publish.yml（正式 Release 触发，通过 OIDC 上传本次已验证产物）。Actions 固定官方版本 SHA；只在发布任务授予 id-token: write。版本标签必须与 Python/metadata 一致，发行扫描拒绝私人目录和会话。用户名与隐私邮箱约定继续有效。PyPI Trusted Publisher 绑定需用户在注册账号中完成，字段见 docs/PUBLISHING.md；本次配置不触发正式上传。
 
 配置验证：本地 68 项测试、源码包内离线回归、发行检查及 actionlint 全部通过；GitHub CI 34765889598 的三个 Python 版本和构建任务成功。已配置 pypi 环境的 v* 标签限制。PyPI 页面已请求打开，需用户按发布指引添加 Pending Publisher。为避免新工作流沿用弃用运行时，官方 Actions 已升级到当前稳定版本的固定 SHA。
+
+## 首次 PyPI 发布诊断
+
+用户确认完成绑定后创建正式 v0.4.0 Release，标签对应 54392e4。发布运行 34766400639 的版本检查、三个 Python 测试与构建全通过，但上传前 OIDC 交换返回 invalid-publisher（matching publisher not found），未上传文件。实际身份为 AIInfraCareLabs/qnap-user-manager，workflow publish.yml，environment pypi，组织 ID 289012739。已查 PyPI 官方 GitHubPublisherMixin：查找按 repo owner/name/owner_id/workflow filename/environment，sub 为 unchecked，不能将此次失败归因于 GitHub 新 immutable subject。需核对用户账号内实际 Pending Publisher 记录及是否配置在正式 PyPI；更正后 gh run rerun 34766400639 --failed，无需重建 Release 或改标签。
