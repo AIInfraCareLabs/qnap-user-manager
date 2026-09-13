@@ -19,3 +19,5 @@ TS-873 / QTS 5.1.9.2954 build 20241120。原生 HTTP 直接传输，无浏览器
 当前环境为 Python 3.12。精确测试数量、覆盖率及构建结果见本次完成后的本地 reports/，不将测试覆盖率等同于固件普遍兼容性。可选浏览器桥接及 dashboard 覆盖程度低于核心 SDK。
 
 0.4.0 发行检查：65 项测试通过，总行覆盖率 81%，session.py 100%；Ruff 与 Twine 检查通过。干净虚拟环境安装 wheel 后导入、版本、内置契约及 CLI 正常；sdist 解压重建并执行全部离线测试通过。归档未包含会话、HAR、缓存、work/ 或 reports/。
+
+自动发布配置验证：新增发行门禁测试后共 68 项离线测试通过。GitHub Linux CI 的 Python 3.11/3.12/3.13、Ruff、wheel/sdist 构建检查与隔离安装已通过（运行 34765889598）。工作流语法通过 actionlint。pypi 环境限制到 v* 标签；PyPI Trusted Publisher 绑定等待用户完成，尚未上传任何包。

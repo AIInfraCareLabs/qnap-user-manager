@@ -1,6 +1,6 @@
 # qnap-user-manager
 
-用于内部 QNAP 用户管理的 Python SDK。原生 HTTP 登录、会话检查与退出，以及用户、组、共享文件夹和共享权限管理均无需浏览器。运行时仅使用 Python 标准库，支持 Python 3.11+；当前构建验证使用 Python 3.12。
+用于内部 QNAP 用户管理的 Python SDK。原生 HTTP 登录、会话检查与退出，以及用户、组、共享文件夹和共享权限管理均无需浏览器。运行时仅使用 Python 标准库，支持 Python 3.11+；Linux CI 已验证 Python 3.11、3.12、3.13；真实 NAS 回归使用 Python 3.12。
 
 **固件边界：仅已验证 QTS 5.1.9.2954（build 20241120，TS-873）。** 不自动套用到其他 QTS 或 QuTS hero。CGI 属于固件实现接口，并非 QNAP 官方稳定 SDK。配额、文件级 ACL 和应用权限尚未验证。
 
