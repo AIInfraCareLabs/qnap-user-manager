@@ -100,3 +100,7 @@ python -m twine check dist/*
 [开发指引](CONTRIBUTING.md)、[示例](examples/)、[开发关键记录](DEVELOPMENT_LOG.md)、[验证记录](docs/VALIDATION.md)、[兼容性](docs/COMPATIBILITY.md)。真实回归入口为 `tests/run_login_regression.py --help`，会登录并修改专用测试资源，仅用于获得授权的测试设备。
 
 当前已生成可安装的 wheel 和源码包，尚未上传任何索引。项目采用 [MIT 许可证](LICENSE)。对外发布前请确认包名和元数据；内部发布亦请配置目标索引和权限。
+
+## 自动发布
+
+GitHub Actions 自动运行离线 CI。配置 PyPI Trusted Publisher 后，发布正式 GitHub Release 可自动上传发行包；详见 [PyPI 发布指引](docs/PUBLISHING.md)。main 推送不会自动发布。

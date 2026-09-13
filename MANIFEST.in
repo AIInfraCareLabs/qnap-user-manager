@@ -2,6 +2,7 @@ include LICENSE README.md CHANGELOG.md CONTRIBUTING.md DEVELOPMENT_LOG.md pyproj
 recursive-include qnap_sdk *.py *.json
 recursive-include docs *.md
 recursive-include examples *.py
+recursive-include scripts *.py
 recursive-include tests test_*.py run_*.py
 recursive-include tests/fixtures *.xml
 prune work

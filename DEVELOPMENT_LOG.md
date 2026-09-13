@@ -39,3 +39,7 @@ GitHub 早期设备授权连接曾因 EOF / 超时失败。用户随后完成系
 ## 提交身份约定
 
 本仓库 author / committer 使用 puluto，邮箱使用 4004102+puluto@users.noreply.github.com；本地仓库 Git 配置已固定。用户要求修正已发布记录，四条历史提交的作者、提交者及版权/文档姓名已统一为用户名。后续不得使用系统全局真实姓名或公司邮箱提交本项目。
+
+## 2026-09-13：自动发布配置
+
+新增 ci.yml（Python 3.11/3.12/3.13 离线测试、Ruff、构建、发行检查及隔离安装）与 publish.yml（正式 Release 触发，通过 OIDC 上传本次已验证产物）。Actions 固定官方版本 SHA；只在发布任务授予 id-token: write。版本标签必须与 Python/metadata 一致，发行扫描拒绝私人目录和会话。用户名与隐私邮箱约定继续有效。PyPI Trusted Publisher 绑定需用户在注册账号中完成，字段见 docs/PUBLISHING.md；本次配置不触发正式上传。
