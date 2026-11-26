@@ -6,6 +6,10 @@ English | [Simplified Chinese](docs/zh_cn/CHANGELOG.md)
 
 - Make English the default documentation language and add a Chinese README and translated documentation tree.
 - Add language navigation and include both languages in source distributions.
+- Collect complete user, group and shared-folder inventories in the local dashboard instead of the first page.
+- Remove `lower`/`upper` from group-membership and user-group reads and their readback verification; the NAS ignores them for these operations.
+- Paginate shared-folder enumeration through the declared `[lower, upper)` contract.
+- Record live write validation on QTS 5.1.9.2954 (24 checks) and the membership and shared-folder pagination findings.
 
 ## 0.4.0 — 2026-09-13
 

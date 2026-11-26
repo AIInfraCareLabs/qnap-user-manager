@@ -158,7 +158,7 @@ class Users:
         )
 
     def groups(self, username):
-        data = self.client.call("users.groups", userName=identity(username), lower=0, upper=10)
+        data = self.client.call("users.groups", userName=identity(username))
         value = field(data, "func.ownContent.ownGroup")
         return tuple(value.split(", ")) if value else ()
 
@@ -257,7 +257,7 @@ class Groups:
         return Group(result.name, result.description, self.members(name))
 
     def members(self, name):
-        data = self.client.call("groups.members", groupname=identity(name), lower=0, upper=10)
+        data = self.client.call("groups.members", groupname=identity(name))
         value = optional(data, "func.ownContent.ownUser", "")
         return tuple(value.split(", ")) if value else ()
 

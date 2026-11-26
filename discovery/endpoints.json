@@ -131,7 +131,7 @@
       "fixed": {
         "subfunc": "share"
       },
-      "parameters": [],
+      "parameters": ["lower", "upper"],
       "defaults": {},
       "query_parameters": [
         "subfunc",
@@ -162,6 +162,10 @@
           "record": 223,
           "response_sha256": "8e26df297550a75dc027b0e7dff65edf216ad3ab325aa44239d77fdc39fd1637",
           "source": "Independent QTS UI capture; query defaults cross-checked against downloaded frontend"
+        },
+        {
+          "source": "Live read-only probe on QTS 5.1.9.2954 on 2026-11-26; [lower, upper) honored and the default request returned all existing shares",
+          "status": "Pagination parameters added; no writes"
         }
       ]
     },
@@ -551,9 +555,7 @@
         "wiz_func": "group_user_edit"
       },
       "parameters": [
-        "groupname",
-        "lower",
-        "upper"
+        "groupname"
       ],
       "query_parameters": [
         "sid",
@@ -642,9 +644,7 @@
       "verification": {
         "operation": "groups.members",
         "parameters": {
-          "groupname": "$target",
-          "lower": 0,
-          "upper": 10
+          "groupname": "$target"
         },
         "checks": [
           {
@@ -677,9 +677,7 @@
         "wiz_func": "user_group_edit"
       },
       "parameters": [
-        "userName",
-        "lower",
-        "upper"
+        "userName"
       ],
       "query_parameters": [
         "sid",

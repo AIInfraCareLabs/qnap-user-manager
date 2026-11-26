@@ -63,6 +63,17 @@ Validation passed for all 20 Markdown documents: English defaults, local links a
 
 This documentation update does not overwrite published 0.4.0 artifacts or create a Release. PyPI README metadata will use the English version in the next package release.
 
+## 2026-11-26: live pagination validation and focused fixes
+
+A second authorized TS-873 / QTS 5.1.9.2954 build 20241120 device was used for write tests. Every test resource was created and removed by the test; no existing data changed. Reports remain local under the ignored `reports/` directory.
+
+- The standard live regression (before the membership-read change) passed all 24 checks with readback; the baseline was restored and cleanup reported no errors.
+- An 11-member test group confirmed that `groups.members`/`users.groups` return the complete comma-separated membership strings and ignore `lower`/`upper`; the structured `userroot`/`grouproot` entries are paginated candidate directories, not membership pages. The ignored pagination parameters were removed from the profile and the two SDK readers. A post-change two-member live check passed membership reads, add/remove and cleanup.
+- `shares.list` accepts `[lower, upper)` and returned all 13 rows (2 existing + 11 test) when called without pagination parameters. The bundled profile now declares `lower`/`upper`; `Shares.list_all()` paginates and an offline test covers page boundaries. The default limit above 13 rows remains unverified, but `list_all()` no longer relies on it.
+- The dashboard used the first list page (10 rows). It now collects `list_all()` for users, groups and shared folders, with an offline regression test.
+- Cleanup note: rapid consecutive user deletion through `fork_del` can be silently ignored; spaced deletion and readback are required. The SDK correctly raised an unconfirmed-deletion error.
+- Read-only browser checks on QTS 5.2.11.3683 confirmed the same membership pagination behavior and a 10-of-138 dashboard truncation. That device was not used for writes and is not claimed as compatible.
+
 ## Continue from here
 
 1. Read this record, [CONTRIBUTING.md](CONTRIBUTING.md) and [VALIDATION.md](docs/VALIDATION.md); run offline checks first.
