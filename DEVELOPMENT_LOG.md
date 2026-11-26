@@ -78,6 +78,10 @@ A second authorized TS-873 / QTS 5.1.9.2954 build 20241120 device was used for w
 
 PR #1 (`fix/pagination-and-dashboard`) was merged into `main` as commit `826dec2`. The package version is now 0.5.0 in `pyproject.toml` and `qnap_sdk/__init__.py`, and the changelog records the documentation localization, dashboard fix, membership parameter cleanup, shared-folder pagination and live validation. Version 0.5.0 has not been tagged or published; 0.4.0 remains the latest PyPI release. Creating the `v0.5.0` Release requires a separate explicit instruction and the existing publishing workflow.
 
+## 2026-11-26: 0.5.0 published
+
+Release `v0.5.0` was created at commit `559c0ec` on `main`. Publishing workflow run `45824925053` completed successfully and uploaded the wheel and source distribution to PyPI. A clean Python 3.12 environment installed `qnap-user-manager==0.5.0` from the official index and verified `qnap-manager --version`, `profiles`, `contracts`, package import and the bundled profile. The tag and Release remain the authoritative 0.5.0 artifacts.
+
 ## Continue from here
 
 1. Read this record, [CONTRIBUTING.md](CONTRIBUTING.md) and [VALIDATION.md](docs/VALIDATION.md); run offline checks first.

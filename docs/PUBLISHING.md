@@ -47,7 +47,7 @@ Review Actions logs after a failure. For identity errors, check owner, repositor
 
 ## Publication history
 
-[Version 0.5.0](https://pypi.org/project/qnap-user-manager/0.5.0/) is published. The GitHub Release is `v0.5.0`. Version 0.4.0 remains available; its publishing run `34766400639` succeeded after retry.
+[Version 0.5.0](https://pypi.org/project/qnap-user-manager/0.5.0/) is published. The GitHub Release is `v0.5.0`; publishing run `45824925053` completed successfully. Official-index installation of 0.5.0 was verified in a clean Python 3.12 environment. Version 0.4.0 remains available; its publishing run `34766400639` succeeded after retry.
 
 The first attempt reported `invalid-publisher`. The user's Pending Publisher screenshot showed matching fields, and retry succeeded without workflow changes. The initial error's exact cause remains undetermined. Official-index installation, version checks, bundled contracts and CLI verification passed.
 

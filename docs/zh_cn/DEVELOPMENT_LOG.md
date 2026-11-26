@@ -78,4 +78,8 @@ GitHub 早期设备授权连接曾因 EOF / 超时失败。用户随后完成系
 
 ## 2026-11-26：0.5.0 版本准备
 
-PR #1（`fix/pagination-and-dashboard`）已以合并提交 `826dec2` 进入 `main`。`pyproject.toml` 和 `qnap_sdk/__init__.py` 的版本已升级为 0.5.0，Changelog 记录了文档双语化、dashboard 修复、成员分页参数清理、共享目录分页与真机验证。0.5.0 尚未打标签或发布；0.4.0 仍是最新 PyPI 版本。创建 `v0.5.0` Release 需要单独的明确指令，并遵循现有发布流程。
+PR #1（`fix/pagination-and-dashboard`）已以合并提交 `826dec2` 进入 `main`。`pyproject.toml` 和 `qnap_sdk/__init__.py` 的版本已升级为 0.5.0，Changelog 记录了文档双语化、dashboard 修复、成员分页参数清理、共享目录分页与真机验证。创建 `v0.5.0` Release 需要单独的明确指令，并遵循现有发布流程。
+
+## 2026-11-26：0.5.0 已发布
+
+Release `v0.5.0` 已创建在 `main` 的提交 `559c0ec` 上。发布工作流运行 `45824925053` 成功，wheel 和源码包已上传 PyPI。在干净 Python 3.12 环境中从官方索引安装 `qnap-user-manager==0.5.0`，验证了 `qnap-manager --version`、`profiles`、`contracts`、包导入及内置 profile。tag 和 Release 是 0.5.0 的权威产物。

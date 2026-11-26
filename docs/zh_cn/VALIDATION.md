@@ -40,3 +40,7 @@ TS-873 / QTS 5.1.9.2954 build 20241120。原生 HTTP 直接传输，无浏览器
 - 共享目录：创建 11 个测试共享目录；连同原有 2 个，`shares.list` 不传 `lower`/`upper` 时返回 `count=13`、13 条记录，SDK 也返回 13 条。该接口同时接受 `[lower, upper)`（原有 2 个时 `upper=1` 返回 1 条）。随包 profile 现已声明 `lower`/`upper`，`Shares.list_all()` 会分页，离线测试覆盖分页边界；13 条以上的默认上限仍未确定，但 `list_all()` 不再依赖它。
 - 清理：连续快速删除用户时，NAS 的 `fork_del` 路径可能静默忽略部分请求。SDK 会报告未确认删除而不会误报成功；间隔删除并延长回读超时后完成清理。live 清理脚本应间隔删除用户并核对列表。
 - 在 QTS 5.2.11.3683 上的只读浏览器会话交叉验证复现了成员行为（`ownUser` 全量、`userroot` 分页），并显示 `users.list` 遵守 `upper`；dashboard 原先只请求第一页，现已改用 `list_all()`。该交叉验证不构成对该固件的兼容性声明。
+
+## 官方 PyPI 验证（0.5.0）
+
+Release `v0.5.0` 创建于提交 `559c0ec`。发布工作流运行 `45824925053` 成功。在干净 Python 3.12 环境中从官方 PyPI 索引安装 `qnap-user-manager==0.5.0`；CLI `--version`、`profiles`、`contracts`、包导入及内置 QTS 5.1.9.2954 profile 均通过。已发布产物对应该 tag 提交。
