@@ -41,7 +41,7 @@ Historical test authorization and evidence are recorded in the development log. 
 
 After building, create a clean environment outside the project and install the wheel with `pip install --no-deps /absolute/path/to/wheel`. Verify imports, `get_profile()` and the three offline CLI commands without relying on `discovery/` or the development workspace. Extract and rebuild the sdist as well. Check archives for work directories, reports, sessions, raw captures and caches.
 
-Keep versions synchronized in `pyproject.toml` and `qnap_sdk/__init__.py`; update the [changelog](CHANGELOG.md) and development record. Use the MIT license and the real repository URL. See the [PyPI publishing guide](docs/PUBLISHING.md) for the configured release workflow. Version 0.4.0 has already been published; never reuse an uploaded version.
+Keep versions synchronized in `pyproject.toml` and `qnap_sdk/__init__.py`; update the [changelog](CHANGELOG.md) and development record. Use the MIT license and the real repository URL. See the [PyPI publishing guide](docs/PUBLISHING.md) for the configured release workflow. Versions 0.4.0 and 0.5.0 have already been published; never reuse an uploaded version.
 
 ## Documentation languages
 

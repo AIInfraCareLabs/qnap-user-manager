@@ -41,7 +41,7 @@ examples/read_only.py 演示登录查询；examples/session_usage.py 演示 SID 
 
 构建后在项目目录以外创建干净环境，用 `pip install --no-deps /absolute/path/to/wheel`，检查导入、get_profile()、三个离线 CLI 命令，确认不需要 discovery/ 或开发工作区。解压 sdist 并重新构建也必须成功。检查归档内容，不包含 work/、reports/、会话、原始抓包与缓存。
 
-版本号需同步 pyproject.toml 和 qnap_sdk/__init__.py，填写 CHANGELOG 和开发记录。项目使用 MIT 许可证；实际仓库 URL 由维护者确认，禁止填入虚构值。发布内部索引：`python -m twine upload --repository-url <approved-index> dist/*`；上传是单独授权的外部动作，0.4.0 已正式发布到 PyPI，后续使用 [发布指引](PUBLISHING.md)。
+版本号需同步 pyproject.toml 和 qnap_sdk/__init__.py，填写 CHANGELOG 和开发记录。项目使用 MIT 许可证；实际仓库 URL 由维护者确认，禁止填入虚构值。发布内部索引：`python -m twine upload --repository-url <approved-index> dist/*`；上传是单独授权的外部动作，0.4.0 和 0.5.0 已正式发布到 PyPI，后续使用 [发布指引](PUBLISHING.md)。
 
 ## 文档语言
 

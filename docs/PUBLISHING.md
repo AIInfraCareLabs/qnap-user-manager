@@ -26,14 +26,14 @@ Pushes to `main` and pull requests run CI. Actions → CI → Run workflow also 
 
 CI runs offline regression, coverage reporting and Ruff on Python 3.11, 3.12 and 3.13. It builds wheel/sdist archives, verifies MIT licensing, bundled contracts and archive paths, then installs the wheel outside the source tree. It does not connect to a NAS.
 
-After binding PyPI, publish an official GitHub Release with a tag matching `v<package version>`, such as `v0.4.0`. Verify that `main` CI passes first. The tagged commit must belong to `main` history, and versions in `pyproject.toml` and `qnap_sdk/__init__.py` must match.
+After binding PyPI, publish an official GitHub Release with a tag matching `v<package version>`, such as `v0.5.0`. Verify that `main` CI passes first. The tagged commit must belong to `main` history, and versions in `pyproject.toml` and `qnap_sdk/__init__.py` must match.
 
 The `release.published` event in `publish.yml` runs release checks and the complete CI workflow, then uploads that run's verified artifacts. Drafts and prereleases do not upload; ordinary `main` pushes do not upload either. Do not create an official Release before completing the binding.
 
 After publication, check the [PyPI project](https://pypi.org/project/qnap-user-manager/) and install in a clean environment:
 
 ```sh
-python -m pip install --index-url https://pypi.org/simple qnap-user-manager==0.4.0
+python -m pip install --index-url https://pypi.org/simple qnap-user-manager==0.5.0
 qnap-manager --version
 ```
 
@@ -47,7 +47,7 @@ Review Actions logs after a failure. For identity errors, check owner, repositor
 
 ## Publication history
 
-[Version 0.4.0](https://pypi.org/project/qnap-user-manager/0.4.0/) is published. The GitHub Release is `v0.4.0`; publishing run `34766400639` succeeded after retry. Version 0.5.0 is prepared but not yet published; create the matching Release only after an explicit instruction.
+[Version 0.5.0](https://pypi.org/project/qnap-user-manager/0.5.0/) is published. The GitHub Release is `v0.5.0`. Version 0.4.0 remains available; its publishing run `34766400639` succeeded after retry.
 
 The first attempt reported `invalid-publisher`. The user's Pending Publisher screenshot showed matching fields, and retry succeeded without workflow changes. The initial error's exact cause remains undetermined. Official-index installation, version checks, bundled contracts and CLI verification passed.
 

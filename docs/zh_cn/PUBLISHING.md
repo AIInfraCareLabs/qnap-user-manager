@@ -28,14 +28,14 @@ GitHub 仓库 Settings → Environments 中使用 pypi 环境。它限制部署�
 
 CI 对 Python 3.11、3.12、3.13 执行离线回归、覆盖率报告及 Ruff；构建 wheel/sdist，检查 MIT、固件契约、异常归档路径，再在源码目录之外安装验证。该过程不连接真实 NAS。
 
-完成 PyPI 绑定后，发布 GitHub 正式 Release，标签必须是 v<版本号>，例如当前版本 v0.4.0。初次发布前先确保 main CI 已成功。标签对应提交必须属于 main 历史；pyproject.toml 和 qnap_sdk/__init__.py 版本必须一致。
+完成 PyPI 绑定后，发布 GitHub 正式 Release，标签必须是 v<版本号>，例如当前版本 v0.5.0。初次发布前先确保 main CI 已成功。标签对应提交必须属于 main 历史；pyproject.toml 和 qnap_sdk/__init__.py 版本必须一致。
 
 publish.yml 的 release.published 事件启动版本检查、全套 CI，再下载该次构建产物上传。草稿和 prerelease 不上传；正常 main 推送也不上传。绑定前不要创建正式 Release。
 
 发布成功后确认 https://pypi.org/project/qnap-user-manager/ ，在干净环境执行：
 
 ```sh
-python -m pip install --index-url https://pypi.org/simple qnap-user-manager==0.4.0
+python -m pip install --index-url https://pypi.org/simple qnap-user-manager==0.5.0
 qnap-manager --version
 ```
 
@@ -49,7 +49,7 @@ qnap-manager --version
 
 ## 当前状态
 
-0.4.0 已成功发布到 https://pypi.org/project/qnap-user-manager/0.4.0/ 。GitHub Release 为 v0.4.0，发布运行 34766400639 重跑后成功。首次运行出现 invalid-publisher，用户提供 Pending Publisher 截图，字段核对一致后重跑成功；未修改工作流，不据此推断首次错误的具体原因。官方 PyPI 隔离安装、版本、内置契约和 CLI 均验证通过。以后同步版本号、推送 main 并确认 CI 成功，再创建对应正式 Release 即可自动发布。0.5.0 已准备但尚未发布；仅在有明确指令后创建对应 Release。
+0.5.0 已发布到 https://pypi.org/project/qnap-user-manager/0.5.0/ ，GitHub Release 为 v0.5.0。0.4.0 仍然可用，其发布运行 34766400639 重跑后成功。首次运行出现 invalid-publisher，用户提供 Pending Publisher 截图，字段核对一致后重跑成功；未修改工作流，不据此推断首次错误的具体原因。官方 PyPI 隔离安装、版本、内置契约和 CLI 均验证通过。以后同步版本号、推送 main 并确认 CI 成功，再创建对应正式 Release 即可自动发布。
 
 官方参考：
 

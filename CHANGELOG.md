@@ -19,4 +19,4 @@ English | [Simplified Chinese](docs/zh_cn/CHANGELOG.md)
 - Mutation readback, separate explicit/inherited permissions, preservation of unchanged properties and no automatic write retries.
 - Offline regression, package-installation verification, development records and examples.
 
-Only QTS 5.1.9.2954 is live-verified. Version 0.5.0 is prepared but not yet published; 0.4.0 remains the latest PyPI release.
+Only QTS 5.1.9.2954 is live-verified. Version 0.5.0 is the current PyPI release.
