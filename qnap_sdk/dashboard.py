@@ -14,6 +14,14 @@ const main=document.getElementById('content'),status=document.getElementById('st
 async function load(){status.textContent='正在读取 NAS…';try{const r=await fetch(location.pathname+'/data');const data=await r.json();if(!r.ok)throw Error();main.replaceChildren();for(const [name,rows] of Object.entries(data)){const section=document.createElement('section'),h=document.createElement('h2');h.textContent=({users:'用户',groups:'用户组',shares:'共享文件夹'})[name]+'（'+rows.length+'）';section.append(h);const table=document.createElement('table');for(const row of rows){const tr=document.createElement('tr');for(const key of (name==='users'?['username','description','disabled']:name==='groups'?['name','description']:['name'])){const td=document.createElement('td');td.textContent=key==='disabled'?(row[key]?'已禁用':'已启用'):row[key];tr.append(td)}table.append(tr)}section.append(table);main.append(section)}status.textContent='读取成功 · '+new Date().toLocaleTimeString()}catch{status.textContent='读取失败，请检查独立 QTS 窗口的登录状态。'}}document.getElementById('refresh').onclick=load;load();</script></html>"""
 
 
+def collect_inventory(client):
+    """Return every user, group and shared folder, not only the first list page."""
+    return {
+        key: [dataclasses.asdict(x) for x in getattr(client, key).list_all()]
+        for key in ("users", "groups", "shares")
+    }
+
+
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--controller", required=True)
@@ -45,13 +53,7 @@ def main():
                 return
             try:
                 if self.path.endswith("/data"):
-                    body = json.dumps(
-                        {
-                            k: [dataclasses.asdict(x) for x in getattr(client, k).list()]
-                            for k in ("users", "groups", "shares")
-                        },
-                        ensure_ascii=False,
-                    ).encode()
+                    body = json.dumps(collect_inventory(client), ensure_ascii=False).encode()
                     mime = "application/json"
                 else:
                     body = PAGE.encode()

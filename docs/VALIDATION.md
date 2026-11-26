@@ -33,3 +33,13 @@ The local Python default CA configuration was incomplete, so installation verifi
 ## Documentation localization — 2026-09-14
 
 All 20 Markdown documents passed checks for English defaults, local link targets and Chinese README routing. The rebuilt sdist contains the Chinese README and all translated guides; wheel metadata reads the English README. Offline regression still passes all 68 tests. Twine and release archive checks passed. These local builds are validation artifacts, not a replacement for published 0.4.0 files.
+
+## Live write and pagination validation — 2026-11-26
+
+Device: TS-873 / QTS 5.1.9.2954 build 20241120, matching the bundled profile exactly. Test users, groups and shared folders were created for the tests and removed afterwards; no existing data was modified. Final baseline: 3 users, 3 groups, 2 shared folders.
+
+- Standard live regression (run before the membership-read change): all 24 checks passed with write readback (CRUD, membership, share properties, password reset, disable/enable and user/group permissions); `baseline_restored=true` and `cleanup_errors=[]`.
+- Membership: with 11 test users in one group, `groups.members` and `Group.members()` returned all 11. The `lower`/`upper` parameters do not paginate membership strings. The structured `userroot` candidate user directory returned 1, 10 and 14 rows for `upper=1/10/100`. Adding and removing a member with 11 members succeeded. The ignored pagination parameters were removed from the profile and the two SDK membership readers. A post-change live check with a two-member group passed membership reads, add/remove and cleanup with the baseline restored.
+- Shared folders: 11 test shares were created; together with 2 existing shares, `shares.list` without `lower`/`upper` returned `count=13` and 13 rows, and the SDK also returned 13. The endpoint does accept `[lower, upper)` (with 2 existing shares, `upper=1` returned 1). The bundled profile now declares `lower`/`upper`, so `Shares.list_all()` paginates; an offline test covers page boundaries. A default limit above 13 rows is still not established, but `list_all()` no longer relies on it.
+- Cleanup: rapid consecutive user deletion can be silently ignored by the NAS `fork_del` path. The SDK reported an unconfirmed deletion instead of claiming success; spaced deletions with a longer verification timeout completed cleanup. Live cleanup scripts should space user deletions and verify the list.
+- A read-only browser-session cross-check on QTS 5.2.11.3683 reproduced the membership behavior (full `ownUser`, paginated `userroot`) and showed that `users.list` honors `upper`; the dashboard had requested only the first page and now uses `list_all()`. This cross-check is not a compatibility claim for that firmware.
