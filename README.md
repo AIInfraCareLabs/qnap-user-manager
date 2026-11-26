@@ -105,7 +105,7 @@ See the [documentation index](docs/README.md), [development guide](CONTRIBUTING.
 
 `tests/run_login_regression.py --help` describes live regression. It authenticates and changes dedicated test resources; run it only against an authorized test device.
 
-Version 0.4.0 is published on [PyPI](https://pypi.org/project/qnap-user-manager/0.4.0/) through GitHub Actions Trusted Publishing, with official-index installation verified in a clean environment. The project uses the [MIT license](LICENSE).
+Version 0.4.0 is published on [PyPI](https://pypi.org/project/qnap-user-manager/0.4.0/) through GitHub Actions Trusted Publishing, with official-index installation verified in a clean environment. Version 0.5.0 is prepared but not yet published. The project uses the [MIT license](LICENSE).
 
 ## Automated publishing
 

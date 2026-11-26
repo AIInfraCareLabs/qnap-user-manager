@@ -74,6 +74,10 @@ A second authorized TS-873 / QTS 5.1.9.2954 build 20241120 device was used for w
 - Cleanup note: rapid consecutive user deletion through `fork_del` can be silently ignored; spaced deletion and readback are required. The SDK correctly raised an unconfirmed-deletion error.
 - Read-only browser checks on QTS 5.2.11.3683 confirmed the same membership pagination behavior and a 10-of-138 dashboard truncation. That device was not used for writes and is not claimed as compatible.
 
+## 2026-11-26: version 0.5.0 preparation
+
+PR #1 (`fix/pagination-and-dashboard`) was merged into `main` as commit `826dec2`. The package version is now 0.5.0 in `pyproject.toml` and `qnap_sdk/__init__.py`, and the changelog records the documentation localization, dashboard fix, membership parameter cleanup, shared-folder pagination and live validation. Version 0.5.0 has not been tagged or published; 0.4.0 remains the latest PyPI release. Creating the `v0.5.0` Release requires a separate explicit instruction and the existing publishing workflow.
+
 ## Continue from here
 
 1. Read this record, [CONTRIBUTING.md](CONTRIBUTING.md) and [VALIDATION.md](docs/VALIDATION.md); run offline checks first.

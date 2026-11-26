@@ -101,7 +101,7 @@ python -m twine check dist/*
 
 [开发指引](docs/zh_cn/CONTRIBUTING.md)、[示例](examples/)、[开发关键记录](docs/zh_cn/DEVELOPMENT_LOG.md)、[验证记录](docs/zh_cn/VALIDATION.md)、[兼容性](docs/zh_cn/COMPATIBILITY.md)。真实回归入口为 `tests/run_login_regression.py --help`，会登录并修改专用测试资源，仅用于获得授权的测试设备。
 
-0.4.0 已通过 GitHub Actions Trusted Publishing 发布到 [PyPI](https://pypi.org/project/qnap-user-manager/0.4.0/)，并完成官方索引隔离安装验证。项目采用 [MIT 许可证](LICENSE)。
+0.4.0 已通过 GitHub Actions Trusted Publishing 发布到 [PyPI](https://pypi.org/project/qnap-user-manager/0.4.0/)，并完成官方索引隔离安装验证。0.5.0 已准备但尚未发布。项目采用 [MIT 许可证](LICENSE)。
 
 ## 自动发布
 

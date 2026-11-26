@@ -2,7 +2,7 @@
 
 English | [Simplified Chinese](docs/zh_cn/CHANGELOG.md)
 
-## Unreleased
+## 0.5.0 — 2026-11-26
 
 - Make English the default documentation language and add a Chinese README and translated documentation tree.
 - Add language navigation and include both languages in source distributions.
@@ -19,4 +19,4 @@ English | [Simplified Chinese](docs/zh_cn/CHANGELOG.md)
 - Mutation readback, separate explicit/inherited permissions, preservation of unchanged properties and no automatic write retries.
 - Offline regression, package-installation verification, development records and examples.
 
-Only QTS 5.1.9.2954 is live-verified. Version 0.4.0 is published on PyPI.
+Only QTS 5.1.9.2954 is live-verified. Version 0.5.0 is prepared but not yet published; 0.4.0 remains the latest PyPI release.

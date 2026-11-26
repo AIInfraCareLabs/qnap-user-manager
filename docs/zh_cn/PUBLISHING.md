@@ -49,7 +49,7 @@ qnap-manager --version
 
 ## 当前状态
 
-0.4.0 已成功发布到 https://pypi.org/project/qnap-user-manager/0.4.0/ 。GitHub Release 为 v0.4.0，发布运行 34766400639 重跑后成功。首次运行出现 invalid-publisher，用户提供 Pending Publisher 截图，字段核对一致后重跑成功；未修改工作流，不据此推断首次错误的具体原因。官方 PyPI 隔离安装、版本、内置契约和 CLI 均验证通过。以后同步版本号、推送 main 并确认 CI 成功，再创建对应正式 Release 即可自动发布。
+0.4.0 已成功发布到 https://pypi.org/project/qnap-user-manager/0.4.0/ 。GitHub Release 为 v0.4.0，发布运行 34766400639 重跑后成功。首次运行出现 invalid-publisher，用户提供 Pending Publisher 截图，字段核对一致后重跑成功；未修改工作流，不据此推断首次错误的具体原因。官方 PyPI 隔离安装、版本、内置契约和 CLI 均验证通过。以后同步版本号、推送 main 并确认 CI 成功，再创建对应正式 Release 即可自动发布。0.5.0 已准备但尚未发布；仅在有明确指令后创建对应 Release。
 
 官方参考：
 
